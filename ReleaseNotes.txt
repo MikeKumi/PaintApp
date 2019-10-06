@@ -1,0 +1,120 @@
+=======================================
+===========Version 1.0.3===============
+=========September 30, 2019============
+=======================================
+       Added Features
+-Keyboard shortcuts
+-Text tool
+-Added functionality to draw rounded rectangle
+-Eraser tool
+-Shapes now draw while in progress
+-Release notes from help menu
+-Tool tutorial from help menu
+-Allows user to select and move image
+-Create a polygon with sides chosen by user
+
+       Changes
+-Class Structure is much cleaner
+-zoom in/out no longer affects menu bar and drawing toolbar
+
+       bugs
+-
+
+       Known Issues
+-
+
+       Future Plans
+-Implement features necessary for paint 5
+-Go for Bob Ross mode if I have time
+
+
+=======================================
+===========Version 1.0.2===============
+=========September 20, 2019============
+=======================================
+	   Added Features
+
+-Pencil tool
+-Added functionality to draw rectangle,
+elliple, circle, and change fill color
+-smart save
+-jpg png and tiff open and save file
+types
+-Added shapes to toolbar
+-Text label describing colors
+-Color grabber
+-Resize canvas (must input dimensions
+manually)
+-Undo and redo
+-zoom in and out with ctrl scrollwheel
+	      Changes
+-Split project into many more total
+files
+
+	        Bugs
+-zoom in/out affects menu bar and
+drawing toolbar
+
+	    Known Issues
+-Class structure is messy
+	    Future Plans
+-Implement features necessary for paint 4
+-Re-restructure classes
+
+
+
+=======================================
+===========Version 1.0.1===============
+=========September 13, 2019=============
+=======================================
+	   Added Features
+
+-Draw a line
+-Save changes made to image
+-Canvas resizes and window recenters to
+match image added
+-Scroll bars
+-Line width controller (yes it works)
+-Line Color controller (also works)
+- help and help about menu options
+
+	      Changes
+-Save Now works Properly
+
+	        Bugs
+-None (atm)
+
+	    Known Issues
+-When scrolling, drawing VBox does not stay
+stationary
+	    Future Plans
+-Implement features necessary for paint 3
+-(Also put code into different classes)
+
+
+
+
+=======================================
+===========Version 1.0.0===============
+=========September 4, 2019=============
+=======================================
+	   Added Features
+
+-Menu Bar
+-Close Button
+-Opening images
+-Saving said images
+
+	      Changes
+-None
+
+	        Bugs
+-None (atm)
+
+	    Known Issues
+-Unclean code
+-No comments
+
+	    Future Plans
+-Implement whatever Rosascus wants next.
+
