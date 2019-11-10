@@ -7,7 +7,20 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * PaintRedo handles the redo stack methodology for when a shape is to be redrawn
+ *
+ * @author Michael Kumicich
+ * 10/7/2019
+ */
+
 public class PaintRedo {
+
+    /**
+     * return line to be pushed
+     * @param shape, graphicsContext
+     * @return shape
+     */
     public Shape undoPush(Shape shape, GraphicsContext graphicsContext){
 
         //if shape == line
