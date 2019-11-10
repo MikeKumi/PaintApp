@@ -1,4 +1,92 @@
 =======================================
+===========Version 1.0.6===============
+==========November 9, 2019==============
+=======================================
+       Added Features
+-Added color options for whole canvas
+
+       Changes
+-Adhered to SOLID by making every function
+only have 1 purpose
+-Added more JavaDoc
+-Fixed select and move not properly working
+
+
+       bugs
+- Undo does not affect image opening,
+canvas changes, text, draw, erase, or
+polygon
+
+       Known Issues
+-
+
+       Future Plans
+-
+
+=======================================
+===========Version 1.0.5===============
+==========October 14, 2019==============
+=======================================
+       Added Features
+-Added Tooltips
+-Regular Copy Paste
+-Added the following extra features
+that change the copied image
+    -Normal
+    -Brighten
+    -Darken
+    -Grayscale
+    -Invert
+    -Saturate
+    -Desaturate
+
+       Changes
+-
+
+       bugs
+-extra features can have issues where
+the settings arent confirmed and the drawn
+area doesn't match
+
+       Known Issues
+-
+
+       Future Plans
+-Clean up everything
+
+
+=======================================
+===========Version 1.0.4===============
+==========October 7, 2019==============
+=======================================
+       Added Features
+-Added 3 unit tests
+    -One test for the resize feature
+    -One test for the fill feature
+    -One test for the stroke feature
+-Autosave timer
+-Autosave can be toggled
+-Autosave timer resets whenever saved
+-Added alternate save image type warning
+-Added JavaDoc comments
+
+
+       Changes
+-
+
+       bugs
+-
+
+       Known Issues
+-
+
+       Future Plans
+-JavaDoc comments
+-Alternate file warning
+
+
+
+=======================================
 ===========Version 1.0.3===============
 =========September 30, 2019============
 =======================================
