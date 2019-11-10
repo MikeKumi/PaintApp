@@ -1,25 +1,36 @@
- /*************************************************************************************
- * Name: Michael Kumicich                                                             *
- * Assignment: Paint 4                                                                *
- * Date: 9/30/2019                                                                    *
- * Honor Code I have neither given or received, nor have I tolerated others' use of   *
- * unauthorized aid.  ~Michael Kumicich                                               *
- * Much of this code is derived from                                                  *
- * http://java-buddy.blogspot.com/2014/12/javafx-filechooser-open-and-save-image.html *
- *************************************************************************************/
+/**
+ * Paint Application created using Java and JavaFX
+ *
+ * @author Michael Kumicich
+ * 11/9/2019
+ */
 
- package Paint2;
+package Paint2;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Main class used to pull everything together and create main window + its properties
+ * @author Michael Kumicich
+ *
+ * 10/7/19
+ */
 public class Main extends Application {
     private Stage window = new Stage();
+
+    /**
+     * Window Setter
+     * @param window
+     */
     void setWindow(Stage window){
         this.window = window;
-    }                       //Setter for the Window that will be
-                                                                                 //used in the rest of the classes
+    }
 
+    /**
+     * Create Main Window
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
@@ -28,7 +39,7 @@ public class Main extends Application {
         window.setWidth(paintWindow.getWindowWidth());                           //*******************************
         window.setHeight(paintWindow.getWindowHeight());                         //*                             *
         window.setScene(paintWindow.Window(window));                             //*    Sets Window Properties   *
-        window.setTitle("Pain(t)");                                              //*                             *
+        window.setTitle("Paint");                                              //*                             *
         window.show();                                                           //*******************************
     }
 
