@@ -1,21 +1,20 @@
 package Paint2;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
-import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import java.util.Stack;
-import javafx.scene.image.WritableImage;
-import javafx.scene.text.Font;
+
+/**
+ * PaintTests is used for the unit tests.
+ *
+ * @author Michael Kumicich
+ * 10/7/2019
+ */
 
 public class PaintTests {
+    /**
+     * Test if canvas is the right size
+     * @param canvasWidth, canvasHeight, canvas
+     */
     public void CanvasTest(String canvasWidth, String canvasHeight, Canvas canvas){
         if(Double.parseDouble(canvasWidth) == canvas.getWidth()){
             System.out.println("Canvas width has successfully resized to " + canvasWidth + "\n");
@@ -32,6 +31,10 @@ public class PaintTests {
         }
     }
 
+    /**
+     * Test to check if stroke color matches the picked color
+     * @param inStroke, cpLine
+     */
     public void StrokeTest(Color inStroke, Color cpLine){
         if(inStroke == cpLine){
             System.out.println("The Shape stroke matches the color picker stroke");
@@ -41,6 +44,10 @@ public class PaintTests {
         }
     }
 
+    /**
+     * Test to check if fill color matches the picked color
+     * @param inFill, cpLine
+     */
     public void FillTest(Color inFill, Color cpFill){
         if(inFill == cpFill){
             System.out.println("The Shape fill matches the color picker fill");
