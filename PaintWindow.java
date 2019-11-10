@@ -7,11 +7,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ScrollPane;
+
+/**
+ * PaintWindow orients the different panes and scene elements.
+ * It also adds the keyboard shortcuts and scroll functionality
+ *
+ * @author Michael Kumicich
+ * 10/7/2019
+ */
 
 public class PaintWindow {
     //Create panes
@@ -20,7 +29,7 @@ public class PaintWindow {
 
     //create window size
     private int WindowWidth = 1500;
-    private int WindowHeight = 800;
+    private int WindowHeight = 950;
 
     private boolean weirdMode = false;
 
@@ -31,26 +40,43 @@ public class PaintWindow {
     //create paintDraw class
     public PaintDraw paintDraw = new PaintDraw();
 
-    //set canvas
+    /**
+     * canvas setter
+     * @param canvas
+     */
     void setCanvas(Canvas canvas) {
         this.canvas = canvas;
     }
 
-    //set graphicsContext
+    /**
+     * graphicsContext setter
+     * @param graphicsContext
+     */
     void setGraphicsContext(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
 
-    //get Window Width
+    /**
+     * WindowWidth getter
+     * @return
+     */
     int getWindowWidth(){
         return WindowWidth;
     }
 
-    //get Window Heihgt
+    /**
+     * WindowHeight getter
+     * @return
+     */
     int getWindowHeight(){
         return WindowHeight;
     }
 
+    /**
+     * Creates panes and orients them with respective vboxes for creating scene
+     * @param primaryStage
+     * @return
+     */
     public Scene Window(Stage primaryStage) {
         ScrollPane scrollPane = new ScrollPane();                                       //creates scrollpane
 
@@ -71,34 +97,10 @@ public class PaintWindow {
         //sets saved = to menuBarSaved
         boolean saved = paintMenuBar.getSaved();
 
-        canvas.setFocusTraversable(true);
-
         //when scrolled
         canvas.setOnScroll(evt -> {
             if (evt.isControlDown()) {                                              //if control is pressed
-                evt.consume();
-                //controls amount to be zoomed
-                final double zoomFactor = evt.getDeltaY() > 0 ? 1.2 : 1 / 1.2;
-
-                Bounds groupBounds = stackPane.getLayoutBounds();
-                final Bounds viewPortBounds = scrollPane.getViewportBounds();
-                //finds pixel range
-                double valX = scrollPane.getHvalue() * (groupBounds.getWidth() - viewPortBounds.getWidth());
-                double valY = scrollPane.getVvalue() * (groupBounds.getHeight() - viewPortBounds.getHeight());
-
-                Point2D posInZoomTarget = stackPane.parentToLocal(canvas.parentToLocal(new Point2D(evt.getX(), evt.getY())));
-
-                Point2D adjustment = stackPane.getLocalToParentTransform().deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
-
-                stackPane.setScaleX(zoomFactor * stackPane.getScaleX());
-                stackPane.setScaleY(zoomFactor * stackPane.getScaleY());
-
-                scrollPane.layout();
-
-                //controls how much scrolling moves
-                groupBounds = canvas.getLayoutBounds();
-                scrollPane.setHvalue((valX + adjustment.getX() / (groupBounds.getWidth() - viewPortBounds.getWidth())));
-                scrollPane.setVvalue((valY + adjustment.getY() / (groupBounds.getHeight() - viewPortBounds.getHeight())));
+                Scroll(evt, scrollPane);
             }
         });
 
@@ -115,31 +117,12 @@ public class PaintWindow {
         borderPane.setTop(paintMenuBar.MenuBar(primaryStage, canvas, graphicsContext, paintDraw));//*Orients elements inside pane *
         borderPane.setCenter(scrollPane);                                                         //*******************************
 
-        //creates scnene with borderPane inside
+        //creates scene with borderPane inside
         Scene scene = new Scene(borderPane, WindowWidth, WindowHeight);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
-                if (ke.getCode() == KeyCode.ESCAPE) {                                   //closes when escape is pressed
-                    paintMenuBar.SmartSave(primaryStage, canvas, paintDraw);
-                }
-                else if (ke.getCode() == KeyCode.S && ke.isControlDown()) {             //Saves when Ctrl+S is pressed
-                    if(saved){
-                        paintMenuBar.Save(canvas);
-                    } else {
-                        paintMenuBar.SaveAs(primaryStage, canvas);
-                    }
-                }
-                else if (ke.getCode() == KeyCode.F && ke.isAltDown()){                  //Opens when Alt+F is pressed
-                    paintMenuBar.OpenImage(primaryStage, canvas, graphicsContext, paintMenuBar.MenuBar(primaryStage, canvas, graphicsContext, paintDraw));
-                }
-                else if (ke.getCode() == KeyCode.W){                                    //Toggles weird Mode
-                    if (paintDraw.getWeirdMode()) {
-                        paintDraw.setWeirdMode(false);
-                    } else {
-                        paintDraw.setWeirdMode(true);
-                    }
-                }
+                KeyPress(ke, paintMenuBar, primaryStage, saved);
             }
         });
 
@@ -148,5 +131,62 @@ public class PaintWindow {
         main.setWindow(primaryStage);                                                    //puts window in main
 
         return scene;
+    }
+
+    /**
+     * Method for scrolling
+     * @param evt, scrollPane
+     */
+    private void Scroll(ScrollEvent evt, ScrollPane scrollPane){
+        evt.consume();
+        //controls amount to be zoomed
+        final double zoomFactor = evt.getDeltaY() > 0 ? 1.2 : 1 / 1.2;
+
+        Bounds groupBounds = stackPane.getLayoutBounds();
+        final Bounds viewPortBounds = scrollPane.getViewportBounds();
+        //finds pixel range
+        double valX = scrollPane.getHvalue() * (groupBounds.getWidth() - viewPortBounds.getWidth());
+        double valY = scrollPane.getVvalue() * (groupBounds.getHeight() - viewPortBounds.getHeight());
+
+        Point2D posInZoomTarget = stackPane.parentToLocal(canvas.parentToLocal(new Point2D(evt.getX(), evt.getY())));
+
+        Point2D adjustment = stackPane.getLocalToParentTransform().deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
+
+        stackPane.setScaleX(zoomFactor * stackPane.getScaleX());
+        stackPane.setScaleY(zoomFactor * stackPane.getScaleY());
+
+        scrollPane.layout();
+
+        //controls how much scrolling moves
+        groupBounds = canvas.getLayoutBounds();
+        scrollPane.setHvalue((valX + adjustment.getX() / (groupBounds.getWidth() - viewPortBounds.getWidth())));
+        scrollPane.setVvalue((valY + adjustment.getY() / (groupBounds.getHeight() - viewPortBounds.getHeight())));
+    }
+
+    /**
+     * Method for different key presses
+     * @param ke, paintMenuBar, primaryStage, saved
+     */
+    private void KeyPress(KeyEvent ke, PaintMenuBar paintMenuBar, Stage primaryStage, Boolean saved){
+        if (ke.getCode() == KeyCode.ESCAPE) {                                   //closes when escape is pressed
+            paintMenuBar.SmartSave(primaryStage, canvas, paintDraw);
+        }
+        else if (ke.getCode() == KeyCode.S && ke.isControlDown()) {             //Saves when Ctrl+S is pressed
+            if(saved){
+                paintMenuBar.Save(canvas);
+            } else {
+                paintMenuBar.SaveAs(primaryStage, canvas);
+            }
+        }
+        else if (ke.getCode() == KeyCode.F && ke.isAltDown()){                  //Opens when Alt+F is pressed
+            paintMenuBar.OpenImage(primaryStage, canvas, graphicsContext, paintMenuBar.MenuBar(primaryStage, canvas, graphicsContext, paintDraw));
+        }
+        else if (ke.getCode() == KeyCode.W){                                    //Toggles weird Mode
+            if (paintDraw.getWeirdMode()) {
+                paintDraw.setWeirdMode(false);
+            } else {
+                paintDraw.setWeirdMode(true);
+            }
+        }
     }
 }
