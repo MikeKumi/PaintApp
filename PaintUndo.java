@@ -7,8 +7,18 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-
+/**
+ * PaintUndo class is used to undo previous shapes drawn
+ *
+ * @author Michael Kumicich
+ * 10/7/2019
+ */
 public class PaintUndo {
+    /**
+     * Push shape
+     * @param removedShape, graphicsContext
+     * @return shape
+     */
     public Shape redoPush(Shape removedShape, GraphicsContext graphicsContext){
         if(removedShape.getClass() == Line.class) {
 
@@ -65,6 +75,10 @@ public class PaintUndo {
         }
     }
 
+    /**
+     * reset shape
+     * @param graphicsContext,m shape
+     */
     public void resetShape(GraphicsContext graphicsContext, Shape shape){
         if(shape.getClass() == Line.class) {
 
