@@ -7,16 +7,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * HelpAbout class is used to display the different help popups called in the help menu option
+ * 10/7/2019
+ *
+ * @author Michael Kumicich
+ */
 
 public class HelpAbout {
-    public static void display(String title, String message){  //Basic Help About option
+
+    /**
+     * Create Help about popup window
+     */
+    public static void HelpAbt(){  //Basic Help About option
         Stage window = new Stage();
 
-        window.setTitle(title);                                //Window title
+        window.setTitle("About");                                //Window title
         window.setWidth(400);                                  //Window Width
 
         Label label = new Label();                             //Creates a new label
-        label.setText(message);                                //Puts message parameter is text
+        label.setText("Version 1.0.5\n" + "Click on File->open "+"or use the drawing toolbar on the left");
 
         VBox vbox = new VBox(10);                           //Creates VBox
         vbox.getChildren().addAll(label);                      //adds label to vbox
@@ -26,6 +36,9 @@ public class HelpAbout {
         window.show();
     }
 
+    /**
+     * Create Release Notes popup window
+     */
     public static void releaseNotes(){                         //Release Notes help Window
         Stage window = new Stage();
 
@@ -35,6 +48,87 @@ public class HelpAbout {
 
         //Release Notes Text
         Text text = new Text("==============================================================\n" +
+                "==========================Version 1.0.6========================================\n" +
+                "=========================November 9, 2019======================================\n" +
+                "==============================================================\n" +
+                "       Added Features\n" +
+                "-Added color options for whole canvas\n" +
+                "\n" +
+                "       Changes\n" +
+                "-Adhered to SOLID by making every function \n" +
+                "only have 1 purpose\n" +
+                "-Added more JavaDoc\n" +
+                "-Fixed select and move not properly working\n" +
+                "\n" +
+                "\n" +
+                "       bugs\n" +
+                "- Undo does not affect image opening, \n" +
+                "canvas changes, text, draw, erase, or\n" +
+                "polygon\n" +
+                "\n" +
+                "       Known Issues\n" +
+                "- \n" +
+                "\n" +
+                "       Future Plans\n" + "-\n" +
+                "==============================================================\n" +
+                "==========================Version 1.0.5========================================\n" +
+                "=========================October 14, 2019======================================\n" +
+                "==============================================================\n" +
+                "       Added Features\n" +
+                "-Added Tooltips\n" +
+                "-Regular Copy Paste\n" +
+                "-Added the following extra features \n" +
+                "that change the copied image\n" +
+                "    -Normal\n" +
+                "    -Brighten\n" +
+                "    -Darken\n" +
+                "    -Grayscale\n" +
+                "    -Invert\n" +
+                "    -Saturate\n" +
+                "    -Desaturate\n" +
+                "    \n" +
+                "       Changes\n" +
+                "-\n" +
+                "\n" +
+                "       bugs\n" +
+                "-extra features can have issues where\n" +
+                "the settings arent confirmed and the drawn\n" +
+                "area doesn't match\n" +
+                "\n" +
+                "       Known Issues\n" +
+                "-\n" +
+                "\n" +
+                "       Future Plans\n" +
+                "-Clean up everything\n\n" +
+                "==============================================================\n" +
+                "==========================Version 1.0.4========================================\n" +
+                "=========================October 7, 2019======================================\n" +
+                "==============================================================\n" +
+                "       Added Features\n" +
+                "-Added 3 unit tests\n" +
+                "    -One test for the resize feature\n" +
+                "    -One test for the fill feature\n" +
+                "    -One test for the stroke feature\n" +
+                "-Added alternate save image type warning\n" +
+                "-Added JavaDoc comments\n" +
+                "-Autosave timer\n" +
+                "-Autosave can be toggled \n" +
+                "-Autosave timer resets whenever saved\n" +
+                "\n" +
+                "       Changes\n" +
+                "-\n" +
+                "\n" +
+                "       bugs\n" +
+                "-\n" +
+                "\n" +
+                "       Known Issues\n" +
+                "-\n" +
+                "\n" +
+                "       Future Plans\n" +
+                "-JavaDoc comments\n" +
+                "-Alternate file warning\n" +
+                "\n" +
+                "==============================================================\n" +
                 "==========================Version 1.0.3========================================\n" +
                 "========================September 30, 2019======================================\n" +
                 "==============================================================\n" +
@@ -170,7 +264,9 @@ public class HelpAbout {
         window.show();
     }
 
-
+    /**
+     * Create Tutorial popup window
+     */
     public static void Tutorial(){                                    //Tutorial help option
         Stage window = new Stage();
 
@@ -204,13 +300,14 @@ public class HelpAbout {
                 "To undo or redo click the undo or redo buttons, respectively.");
         //End of Tutorial Text
 
-        scrollPane.setFitToWidth(true);                                                //*******************************
-        scrollPane.setContent(text);                                                   //*                             *
-        scrollPane.setVisible(true);                                                   //*                             *
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);                   //*     pane inside of it.      *
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);                   //*                             *
-        scrollPane.setFitToWidth(true);                                                //*                             *
-        scrollPane.setFitToHeight(true);                                               //*******************************
+        //set Scrollpane attributes
+        scrollPane.setFitToWidth(true);
+        scrollPane.setContent(text);
+        scrollPane.setVisible(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
 
         Scene scene = new Scene(scrollPane, 500, 800);
         window.setScene(scene);
